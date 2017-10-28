@@ -6,6 +6,7 @@ function NavBar(props){
 
 return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+      <span><img src="/logo.png" className="logo" /></span>
       <a className="navbar-brand" href="#">notimal</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon" />

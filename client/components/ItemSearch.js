@@ -20,12 +20,12 @@ const ItemSearch = (props) => {
       {
         items.length && items.map((item, i) => {
           return (
-          <form onSubmit={ handleClick } key={i} className="form-inline">
+          <form onSubmit={ handleClick } key={i} className="col-sm-4">
           <div className="card mb-3">
           <img className="card-img-top" src="http://via.placeholder.com/350x150" alt="Card image cap" />
             <div className="card-body" value={item.food.uri} name="item">
-              <h4 className="card-title">{item.food.label}</h4>
-              <select name="measurement">
+              <h5 className="card-title">{item.food.label}</h5>
+              <select name="measurement" className="mt-1">
               {
                 item.measures.length && item.measures.map((m, n) => {
                   return (
@@ -38,6 +38,8 @@ const ItemSearch = (props) => {
                 })
               }
               </select>
+              <br />
+              <small className="mr-1">measurement:</small>
               <button className="btn btn-success float-right" name="item" value={item.food.uri}>Select</button>
             </div>
           </div>
