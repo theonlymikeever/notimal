@@ -17,6 +17,7 @@ const ItemSearch = (props) => {
           return (
             <li key={i}>
               {item.food.label}
+              <form><input name="food" /></form>
               <ul>
                 {
                   item.measures.length && item.measures.map((m, n) => {
