@@ -5,9 +5,9 @@ const RecipeResultCard = (props) => {
   const isVegan = (labels) => {
     console.log('searching labels: ', labels)
     if (labels.indexOf('Vegan') !== -1){
-      return (<div>Vegan <img src="/images/isVegan.png" /></div>)
+      return (<img src="/images/broccoli.png" width="50" />)
     }
-      return 'not-vegan'
+      return (<img src="/images/steak.png" width="50" />)
   }
   return (
   <div>

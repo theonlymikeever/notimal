@@ -1,5 +1,5 @@
 import axios from 'axios'
-import history from '../history'
+// import history from '../history'
 
 //Action Types
 const GET_RECIPE = 'GET_RECIPE'
@@ -15,7 +15,6 @@ export const searchRecipe = (query) => {
   return (dispatch) => {
       axios.get(`/api/recipe/?f=${ query }`)
         .then(res => {
-          console.log('dispatching!')
           dispatch(getRecipe(res.data || defaultRecipe))
         })
         .catch(err => console.log(err))
@@ -26,7 +25,7 @@ export const searchRecipe = (query) => {
 export default function (state = defaultRecipe, action) {
   switch (action.type){
     case GET_RECIPE:
-      return action.recipe
+      return Object.assign({}, state, {recipe: action.recipe})
     default:
       return state;
   }
