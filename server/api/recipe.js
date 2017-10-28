@@ -10,8 +10,8 @@ router.get('/', (req, res, next) => {
   // const uri = `https://api.edamam.com/search?q=${ query }&app_id=${ appId }&app_key=${ appKey }&health=vegan`
   const uri = `https://api.edamam.com/search?q=${ query }&app_id=${ appId }&app_key=${ appKey }`
 
-  request(uri)
-    .then(process => res.send(process))
+  request({ uri, json: true })
+    .then(recipe => res.send(recipe))
     .catch(err => console.log(err.error))
 
 //Below uses request without promises, which has beemn changed
