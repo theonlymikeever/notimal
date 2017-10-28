@@ -12,13 +12,13 @@ const defaultState = {
 }
 
 //ACTION CREATORS
-const getItems = search => ({ type: GET_ITEMS, search })
-const getItem = search => ({ type: GET_ITEM, search })
+const getItems = items => ({ type: GET_ITEMS, items })
+// const getItem = search => ({ type: GET_ITEM, search })
 
 //THUNK CREATORS
 export const findItem = (query) => {
   return (dispatch) => {
-    axios.get(`/api/nutrition/?ing=${ query }`)
+    axios.get(`/api/nutrition?ingr=${ query }`)
       .then(res => {
         dispatch(getItems(res.data || defaultState))
       })
@@ -30,7 +30,7 @@ export const findItem = (query) => {
 export default function (state = defaultState, action){
   switch (action.type){
     case GET_ITEMS:
-      return action.items
+      return Object.assign({}, state, {items: action.items})
     case GET_ITEM:
       return action.item
     default:

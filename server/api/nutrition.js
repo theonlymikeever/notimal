@@ -12,7 +12,6 @@ router.get('/', (req, res, next) => {
 
   request({ uri, json: true })
     .then(results => {
-      console.log('search results: ', results.hints)
       res.send(results.hints)
       // const measureUri =
       // const body = {

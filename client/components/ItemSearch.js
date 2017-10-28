@@ -3,20 +3,24 @@ import { connect } from 'react-redux'
 import { findItem } from '../store'
 
 const ItemSearch = (props) => {
-  const { handlesubmit, items } = props
+  const { handleSubmit, items } = props
 
   return (
     <div>
+    <form onSubmit={ handleSubmit }>
+      <label>search:</label>
+      <input name="query" />
+    </form>
     <ul>
       {
-        items && items.map((item, i) => {
+        items.length && items.map((item, i) => {
           return (
             <li key={i}>
-              item.food.label
+              {item.food.label}
               <ul>
                 {
-                  item.measures && item.measures.map((m, n) => {
-                    return (<li key={n}>m && m.label</li>)
+                  item.measures.length && item.measures.map((m, n) => {
+                    return (<li key={n}>{m.label}</li>)
                   })
                 }
               </ul>
@@ -29,15 +33,15 @@ const ItemSearch = (props) => {
   )
 }
 
-const mapState = ({ items}) => {
+const mapState = ({ item }) => {
   return {
-    items
+    items: item.items
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    handlesubmit(evt) {
+    handleSubmit(evt) {
       evt.preventDefault()
       console.log('you searched: ', evt.target.query.value)
       dispatch(findItem(evt.target.query.value))
