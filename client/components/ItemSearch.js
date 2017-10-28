@@ -7,9 +7,8 @@ const ItemSearch = (props) => {
 
   return (
     <div>
-    <form onSubmit={ handleSubmit }>
-      <label>search:</label>
-      <input name="query" />
+    <form onSubmit={ handleSubmit } className="form" >
+      <input name="query" className="form-control" placeholder={'search an item'} />
     </form>
     <ul>
       {
@@ -46,7 +45,7 @@ const ItemSearch = (props) => {
 
 const mapState = ({ item }) => {
   return {
-    items: item.items
+    items: item.items,
   }
 }
 
@@ -58,13 +57,12 @@ const mapDispatch = (dispatch) => {
         foodURI: evt.target.item.value,
         measureURI: evt.target.measurement.value
       }
-      console.log(body)
       dispatch(getItemInfo(body))
     },
     handleSubmit(evt) {
       evt.preventDefault()
-      console.log('you searched: ', evt.target.query.value)
       dispatch(findItem(evt.target.query.value))
+      evt.target.query.value = '' //reset form
     }
   }
 }
