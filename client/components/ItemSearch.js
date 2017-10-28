@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { findItem } from '../store'
+import { findItem, getItemInfo } from '../store'
 
 const ItemSearch = (props) => {
-  const { handleSubmit, items } = props
+  const { handleSubmit, handleClick, items } = props
 
   return (
     <div>
@@ -15,17 +15,27 @@ const ItemSearch = (props) => {
       {
         items.length && items.map((item, i) => {
           return (
-            <li key={i}>
+            <form onSubmit={ handleClick } key={i}>
+            <li value={item.food.uri} name="item">
               {item.food.label}
-              <form><input name="food" /></form>
               <ul>
+                <select name="measurement">
                 {
                   item.measures.length && item.measures.map((m, n) => {
-                    return (<li key={n}>{m.label}</li>)
+                    return (
+                      <option
+                        key={n}
+                        value={m.uri}>
+                        {m.label}
+                      </option>
+                    )
                   })
                 }
+                </select>
+                <button name="item" value={item.food.uri}>Submit</button>
               </ul>
             </li>
+            </form>
           )
         })
       }
@@ -42,6 +52,15 @@ const mapState = ({ item }) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    handleClick(evt){
+      evt.preventDefault()
+      const body = {
+        foodURI: evt.target.item.value,
+        measureURI: evt.target.measurement.value
+      }
+      console.log(body)
+      dispatch(getItemInfo(body))
+    },
     handleSubmit(evt) {
       evt.preventDefault()
       console.log('you searched: ', evt.target.query.value)

@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import history from '../history'
+import history from '../history'
 
 //ACTION TYPES
 const GET_ITEMS = 'GET_ITEMS'
@@ -13,7 +13,7 @@ const defaultState = {
 
 //ACTION CREATORS
 const getItems = items => ({ type: GET_ITEMS, items })
-// const getItem = search => ({ type: GET_ITEM, search })
+const getItem = item => ({ type: GET_ITEM, item })
 
 //THUNK CREATORS
 export const findItem = (query) => {
@@ -25,6 +25,16 @@ export const findItem = (query) => {
       .catch(err => console.log(err))
   }
 }
+export const getItemInfo = (item) => {
+  return (dispatch) => {
+    axios.post(`/api/nutrition`, item)
+      .then(res => {
+        dispatch(getItem(res.data || defaultState))
+        history.push(`/scorecard`)
+      })
+      .catch(err => console.log(err))
+  }
+}
 
 //REDUCER
 export default function (state = defaultState, action){
@@ -32,7 +42,7 @@ export default function (state = defaultState, action){
     case GET_ITEMS:
       return Object.assign({}, state, {items: action.items})
     case GET_ITEM:
-      return action.item
+      return Object.assign({}, state, {foundItem: action.item})
     default:
       return state;
   }
