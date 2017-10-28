@@ -15,6 +15,7 @@ export const searchRecipe = (query) => {
   return (dispatch) => {
       axios.get(`/api/recipe/?f=${ query }`)
         .then(res => {
+          console.log('dispatching!')
           dispatch(getRecipe(res.data || defaultRecipe))
         })
         .catch(err => console.log(err))

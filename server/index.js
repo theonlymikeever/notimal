@@ -57,6 +57,7 @@ const createApp = () => {
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
+  app.use(express.static(path.join(__dirname, '..', 'public/images')))
 
   // sends index.html
   app.use('*', (req, res) => {

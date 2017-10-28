@@ -7,7 +7,9 @@ const appKey = process.env.appKey || null
 
 router.get('/', (req, res, next) => {
   const query = req.query.f
-  const uri = `https://api.edamam.com/search?q=${ query }&app_id=${ appId }&app_key=${ appKey }&health=vegan`
+  //vegan only search:
+  // const uri = `https://api.edamam.com/search?q=${ query }&app_id=${ appId }&app_key=${ appKey }&health=vegan`
+  const uri = `https://api.edamam.com/search?q=${ query }&app_id=${ appId }&app_key=${ appKey }`
 
   request(uri)
     .then(process => res.send(process))
