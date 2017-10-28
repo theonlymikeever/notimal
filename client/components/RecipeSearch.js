@@ -4,9 +4,9 @@ import { searchRecipe } from '../store'
 
 const RecipeSearch = (props) => {
   const { handleSubmit } = props
+  console.log('recipe:', props.recipe)
   return (
     <form onSubmit={ handleSubmit }>
-      <p>hey</p>
       <label>search:</label>
       <input name="query" />
     </form>
@@ -23,8 +23,8 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      console.log('you searched: ', evt.query)
-      dispatch(searchRecipe(evt.query))
+      console.log('you searched: ', evt.target.query.value)
+      dispatch(searchRecipe(evt.target.query.value))
     }
   }
 }
