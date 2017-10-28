@@ -1,9 +1,8 @@
 const router = require('express').Router()
 const request = require('request-promise-native')
 
-
-const appId = process.env.appId || null
-const appKey = process.env.appKey || null
+const appId = process.env.appId_R || null
+const appKey = process.env.appKey_R || null
 
 router.get('/', (req, res, next) => {
   const query = req.query.f
@@ -13,7 +12,7 @@ router.get('/', (req, res, next) => {
 
   request(uri)
     .then(process => res.send(process))
-    .catch(console.log)
+    .catch(err => console.log(err.error))
 
 //Below uses request without promises, which has beemn changed
 // *********************************************************
