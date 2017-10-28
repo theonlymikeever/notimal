@@ -14,12 +14,6 @@ router.get('/', (req, res, next) => {
     .then(recipe => res.send(recipe))
     .catch(err => console.log(err.error))
 
-//Below uses request without promises, which has beemn changed
-// *********************************************************
-//   request(url, function (error, response, body) {
-//   console.log('error:', error); // Print the error if one occurred
-//   res.send(body);
-// });
 })
 
 

@@ -9,36 +9,65 @@ router.get('/', (req, res, next) => {
   console.log('query: ', query)
   //Food Parser uri
   const uri = `https://api.edamam.com/api/food-database/parser?ingr=${query}&app_id=${appId}&app_key=${appKey}&page=0`
-  //Nutrient uri (based on the result of parser)
-  const uri2 = `https://api.edamam.com/api/food-database/nutrients?app_id=${appId}&app_key=${appKey}`
 
   request({ uri, json: true })
     .then(results => {
-      console.log('uri ', results.parsed)
-      // res.send(results)
-      const body = {
-        yield: 1,
-        ingredients: [
-          {
-            quantity: 1,
-            measureURI: 'http://www.edamam.com/ontologies/edamam.owl#Measure_serving',
-            foodURI: results.parsed[0].food.uri
-          }
-        ]
-      }
-      const options = {
-        method: 'POST',
-        uri: uri2,
-        body: body,
-        json: true
-      }
-      return request(options)
+      console.log('search results: ', results.hints)
+      res.send(results.hints)
+      // const measureUri =
+      // const body = {
+      //   yield: 1,
+      //   ingredients: [
+      //     {
+      //       quantity: 1,
+      //       measureURI: results.parsed[0].food.measure.uri,
+      //       foodURI: results.parsed[0].food.uri
+      //     }
+      //   ]
+      // }
+      // const options = {
+      //   method: 'POST',
+      //   uri: uri2,
+      //   body: body,
+      //   json: true
+      // }
+      // return request(options)
     })
+    // .then(nutrients => {
+    //   res.send(nutrients)
+    // })
+    .catch( err => console.log(err.error))
+})
+
+router.post('/', (req, res, next) => {
+  const foodURI = req.body.foodURI
+  const measureURI = req.body.measureURI
+  console.log('looking up: ', req.body)
+  //Nutrient uri (based on the result of parser)
+  const uri = `https://api.edamam.com/api/food-database/nutrients?app_id=${appId}&app_key=${appKey}`
+  const body = {
+    yield: 1,
+    ingredients: [
+      {
+        quantity: 1,
+        measureURI,
+        foodURI
+      }
+    ]
+  }
+  const options = {
+    method: 'POST',
+    uri,
+    body,
+    json: true
+  }
+   request(options)
     .then(nutrients => {
       res.send(nutrients)
     })
     .catch( err => console.log(err.error))
 })
+
 
 module.exports = router
 
