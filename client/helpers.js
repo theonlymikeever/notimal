@@ -1,4 +1,5 @@
 //some improvements can be made here for edge cases
+//Sourced from https://www.peta.org
 const animalFreeList = [
   "Adrenaline",
   "Alanine",
@@ -239,8 +240,7 @@ const animalFreeList = [
   "Whey",
   "Wool",
   "Wool Fat",
-  "Wool Wax"
-]
+  "Wool Wax"]
 
 //This function will run through any list and check it
 //against the list of ingredients above
