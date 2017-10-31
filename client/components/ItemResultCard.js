@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { isVegan, toTitleCase } from '../helpers'
+import { isVegan, toTitleCase, cleanString } from '../helpers'
 
 
 const ItemResultCard = (props) => {
@@ -18,6 +18,9 @@ const ItemResultCard = (props) => {
   const image = item && item.image
               ? item.image
               : 'http://www.foodista.com/sites/default/files/default_images/placeholder_rev.png'
+  const dietLabels = item && item.dietLabels
+                   ? item.dietLabels.map(label => toTitleCase(label))
+                   : 'N/A'
   return (
   <div className="card">
     <h4 className="card-header">
@@ -36,17 +39,35 @@ const ItemResultCard = (props) => {
               Calories <span className="badge badge-light">{item.calories}</span>
             </button>
           <h4 className="card-title mt-1">{ name }</h4>
-          <p className="card-text pt-2"><strong>Ingredients:</strong>{ingredients}</p>
-          <div className="row mt-3">
-            {
-              nutrients.map((nutr, i) => {
-                return (
-                  <button key={i} type="button" className="btn btn-success m-1 col-sm-5">
-                    {nutr.label} <span className="badge badge-light">{nutr.quantity.toFixed(0, 2)}{nutr.unit}</span>
-                  </button>
-                )
-              })
-            }
+          <p className="card-text pt-2"><strong className="mr-2">Ingredients:</strong>{ingredients}</p>
+          <div className="mt-3">
+          <strong className="mr-2">Diet Labels:</strong>
+          {
+            dietLabels.map((label, i) => <span key={i} className="badge badge-pill badge-secondary">{label}</span>)
+          }
+          </div>
+          <div className="mt-3">
+            <table className="table table-striped table-success">
+              <thead>
+                <tr>
+                  <th>Nutrient</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  nutrients.map((nutr, i) => {
+                    return (
+                    <tr key={i}>
+                      <th>{nutr.label}</th>
+                      <td>{nutr.quantity.toFixed(0, 2)}{cleanString(nutr.unit)}</td>
+                    </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+            <p className="float-right"><em>* all nutrients are per pound</em></p>
           </div>
         </div>
       </div>
