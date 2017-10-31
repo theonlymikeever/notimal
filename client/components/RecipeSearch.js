@@ -8,11 +8,14 @@ const RecipeSearch = (props) => {
   console.log('recipes returned:', recipe)
   return (
   <div>
-    <form onSubmit={ handleSubmit }>
-      <label>search:</label>
-      <input name="query" />
+    <form onSubmit={ handleSubmit } className="mb-3">
+      <div className="inputgroup col-12">
+        <input name="query" />
+        <span className="highlight" />
+        <span className="bar" />
+        <label>Search</label>
+      </div>
     </form>
-    <h3>Results:</h3>
     <RecipeResultCard recipe={ recipe } />
   </div>
   )
@@ -30,6 +33,7 @@ const mapDispatch = (dispatch) => {
       evt.preventDefault()
       console.log('you searched: ', evt.target.query.value)
       dispatch(searchRecipe(evt.target.query.value))
+      evt.target.query.value = '' //reset form
     }
   }
 }

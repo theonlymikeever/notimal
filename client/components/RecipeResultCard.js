@@ -1,39 +1,34 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { isVegan } from '../helpers'
 
 const RecipeResultCard = (props) => {
-  const isVegan = (labels) => {
-    console.log('searching labels: ', labels)
-    if (labels.indexOf('Vegan') !== -1){
-      return (<img src="/images/broccoli.png" width="50" />)
-    }
-      return (<img src="/images/steak.png" width="50" />)
-  }
+  console.log('props:',props)
   return (
-  <div>
-  <ul>
+  <table className="table table-striped table-success">
+    <thead>
+      <tr>
+        <th>Recipe</th>
+        <th>Vegan</th>
+      </tr>
+    </thead>
   {
     props.recipe && props.recipe.hits
       ? props.recipe.hits.map((res, i) => {
+        let vegan = isVegan(res.recipe.healthLabels)
         return (
-          <li key={i}>{ res.recipe.label } - { res.recipe.healthLabels ? isVegan(res.recipe.healthLabels) : 'no labels'}</li>
+        <tbody key={i}>
+          <tr>
+            <th>{ res.recipe.label }</th>
+            <td><img src={ vegan ? 'images/broccoli.png' : '/images/steak.png'} width="45" className="mr-1" />{ vegan ? 'Vegan' : 'Not-Vegan'}</td>
+          </tr>
+      </tbody>
         )
       })
-      : '...'
+      : null
   }
-  </ul>
-  </div>
+  </table>
   )
 }
 
-
-// const mapState = ({ recipe }) => recipe
-
-// const mapState = ({ recipe }) => {
-//   return {
-//     recipe
-//   }
-// }
-
 export default RecipeResultCard
-// export default connect(mapState)(RecipeResultCard)

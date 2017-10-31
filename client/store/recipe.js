@@ -25,7 +25,7 @@ export const searchRecipe = (query) => {
 export default function (state = defaultRecipe, action) {
   switch (action.type){
     case GET_RECIPE:
-      return Object.assign({}, state, {recipe: action.recipe})
+      return Object.assign({}, state, action.recipe)
     default:
       return state;
   }
