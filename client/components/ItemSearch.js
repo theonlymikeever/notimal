@@ -13,7 +13,7 @@ const ItemSearch = (props) => {
         <input name="query" />
         <span className="highlight" />
         <span className="bar" />
-        <label>Search</label>
+        <label>Search Item or Product</label>
       </div>
     </form>
     <div className="card-deck">

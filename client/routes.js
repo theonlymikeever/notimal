@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, RecipeSearch, ItemSearch, ItemResultCard} from './components'
+import {Main, Login, Signup, UserHome, RecipeSearch, ItemSearch, ItemResultCard, About} from './components'
 import {me} from './store'
 
 /**
@@ -26,6 +26,7 @@ class Routes extends Component {
             <Route path='/search/recipes' component={RecipeSearch} />
             <Route path='/search/' component={ItemSearch} />
             <Route path='/scorecard' component={ItemResultCard} onEnter={() =>  window.scrollTo(0, 0)} />
+            <Route path='/About' component={About} />
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
             {
