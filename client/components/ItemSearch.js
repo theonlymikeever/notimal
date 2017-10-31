@@ -19,28 +19,16 @@ const ItemSearch = (props) => {
     <div className="card-deck">
       {
         items.length && items.map((item, i) => {
+          let vegan = isVegan(item.healthLabels, item.ingredients[0].parsed[0].foodContentsLabel)
           return (
           <form onSubmit={ handleClick } key={i} className="col-sm-4">
           <div className="card mb-3">
-          <img className="card-img-top" src="http://via.placeholder.com/350x150" alt="Card image cap" />
-            <div className="card-body" value={item.food.uri} name="item">
-              <h5 className="card-title">{item.food.label}</h5>
-              <select name="measurement" className="mt-1">
-              {
-                item.measures.length && item.measures.map((m, n) => {
-                  return (
-                    <option
-                      key={n}
-                      value={m.uri}>
-                      {m.label}
-                    </option>
-                  )
-                })
-              }
-              </select>
-              <br />
-              <small className="mr-1">measurement:</small>
-              <button className="btn btn-success float-right" name="item" value={item.food.uri}>Select</button>
+          <img className="card-img-top" src={item.image.url} alt="Card image cap" />
+            <div className="card-body">
+              <h5 className="card-title">{item.ingredients[0].parsed[0].food}</h5>
+              <div className="mb-3 ml-0"><img src={ vegan ? 'images/broccoli.png' : '/images/steak.png'} width="45" className="mr-1" />{ vegan ? 'Vegan' : 'Not-Vegan'}</div>
+              <input className="hidden" name="measurement" value={item.ingredients[0].parsed[0].measureURI} readOnly hidden />
+              <button className="btn btn-success btn-block" name="item" value={item.ingredients[0].parsed[0].foodURI}>Select</button>
             </div>
           </div>
           </form>
@@ -66,6 +54,7 @@ const mapDispatch = (dispatch) => {
         foodURI: evt.target.item.value,
         measureURI: evt.target.measurement.value
       }
+      console.log(body)
       dispatch(getItemInfo(body))
     },
     handleSubmit(evt) {

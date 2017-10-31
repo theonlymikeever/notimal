@@ -1,5 +1,6 @@
 //some improvements can be made here for edge cases
-//Sourced from https://www.peta.org
+//Sourced from https://www.peta.org with additions by myself
+//to improve the reliability
 const animalFreeList = [
   "Adrenaline",
   "Alanine",
@@ -19,6 +20,7 @@ const animalFreeList = [
   "Animal Hair",
   "Arachidonic Acid",
   "Arachidyl Proprionate",
+  "Beef",
   "Bee Pollen",
   "Bee Products",
   "Beeswax. Honeycomb",
@@ -47,6 +49,8 @@ const animalFreeList = [
   "Cerebrosides",
   "Cetyl Alcohol",
   "Cetyl Palmitate",
+  "Cheese",
+  "Chicken",
   "Chitosan",
   "Cholesterin",
   "Cholesterol",
@@ -66,6 +70,8 @@ const animalFreeList = [
   "Down",
   "Duodenum Substances",
   "Dyes",
+  "Egg",
+  "Eggs",
   "Egg Protein",
   "Elastin",
   "Emu Oil",
@@ -117,6 +123,7 @@ const animalFreeList = [
   "Calfskin",
   "Sheepskin",
   "Alligator Skin",
+  "Lamb",
   "Lecithin. Choline Bitartrate",
   "Linoleic Acid",
   "Lipase",
@@ -160,6 +167,7 @@ const animalFreeList = [
   "Polyglycerol",
   "Polypeptides",
   "Polysorbates",
+  "Pork",
   "Pristane",
   "Progesterone",
   "Propolis",
@@ -212,7 +220,9 @@ const animalFreeList = [
   "Steroids. Sterols",
   "Sterols",
   "Suede",
-  "Tallow. Tallow Fatty Alcohol. Stearic Acid",
+  "Tallow",
+  "Tallow Fatty Alcohol",
+  "Stearic Acid",
   "Tallow Acid",
   "Tallow Amide",
   "Tallow Amine",
@@ -246,29 +256,39 @@ const animalFreeList = [
 //against the list of ingredients above
 //room for serious improvement for speed as well as ability
 //to return which ingredients are not vegan
-export function veganIngredients(list){
-  let upperCaseNames = animalFreeList.map(value => {
+export function veganIngredients(ingredients){
+  let upperCaseList = animalFreeList.map(value => {
       return value.toUpperCase();
     });
-  return list.every(i => {
-    return upperCaseNames.indexOf(i.toUpperCase()) === -1
+  return upperCaseList.every(i => {
+    return ingredients.toUpperCase().indexOf(i) === -1
   })
 }
 
 
 //Function checks the specific label list given back by
 //Edamans 'heathLabels'
-export function isVegan (labels){
-    console.log('searching labels: ', labels)
+export function isVegan (labels, ingr){
     if (labels.indexOf('VEGAN') !== -1){
-      return '/images/broccoli.png'
-    } else if (labels.indexOf('VEGETARIAN') !== -1){
-      return '/images/broccoli.png'
-    } else {
-      return '/images/steak.png'
+      return true
     }
+    if (ingr){
+      console.log('no label checking ingredients ',veganIngredients(ingr))
+      return veganIngredients(ingr)
+    }
+    return false
   }
 
 export function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return str.replace(/_/g, ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+export function cleanString(input) {
+    var output = "";
+    for (var i=0; i<input.length; i++) {
+        if (input.charCodeAt(i) <= 127) {
+            output += input.charAt(i);
+        }
+    }
+    return output;
 }
