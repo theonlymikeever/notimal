@@ -41,7 +41,7 @@ const ItemResultCard = (props) => {
             {
               nutrients.map((nutr, i) => {
                 return (
-                  <button key={i} type="button" className="btn btn-success m-1">
+                  <button key={i} type="button" className="btn btn-success m-1 col-sm-5">
                     {nutr.label} <span className="badge badge-light">{nutr.quantity.toFixed(0, 2)}{nutr.unit}</span>
                   </button>
                 )

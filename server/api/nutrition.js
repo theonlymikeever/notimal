@@ -96,11 +96,11 @@ router.post('/', (req, res, next) => {
     .then(nutrients => {
       //Image addition via Google Custom Search API
       console.log('searching image for ', nutrients.ingredients[0].parsed[0].food)
-      client.search(nutrients.ingredients[0].parsed[0].food)
-        .then(images => {
-          nutrients.image = images[1].url
+      // client.search(nutrients.ingredients[0].parsed[0].food)
+      //   .then(images => {
+      //     nutrients.image = images[1].url
           res.send(nutrients)
-        })
+        // })
     })
     .catch( err => console.log(err.error))
 })
