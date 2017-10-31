@@ -1,5 +1,17 @@
+$primaryGreen: #BEF202;
+$secondaryGreen: #88C425;
+$tertiaryGreen: #519548;
+$brightGreen: #EAFDE6;
+$primaryBlue: #1B676B;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   font-family: sans-serif;
+  background-color: $primaryGreen;
 
   a {
     text-decoration: none;
@@ -18,4 +30,143 @@ body {
     margin: 1em;
     display: inline-block;
   }
+}
+
+#app {
+  margin-bottom: 85px;
+}
+
+/* TYPEOGRAPHY ================================== */
+
+h1 {
+  font-size: 1.75rem;
+  color: $primaryBlue;
+}
+
+/* FOOTER ================================== */
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+/* FORMS ================================== */
+.inputgroup        {
+  position:relative;
+  margin-bottom:45px;
+}
+.inputgroup input         {
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:100%;
+  border:none;
+  border-bottom:1px solid #757575;
+  background-color: $primaryGreen
+}
+.inputgroup input:focus     { outline:none; }
+
+/* LABEL ======================================= */
+.inputgroup label          {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+.inputgroup input:focus ~ label   {
+  top:-20px;
+  font-size:14px;
+  color: $primaryBlue;
+}
+
+/* BOTTOM BARS ================================= */
+.bar  { position:relative; display:block; width:100%; }
+.bar:before, .bar:after   {
+  content:'';
+  height:2px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:$tertiaryGreen;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%;
+}
+
+/* active state */
+.inputgroup input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%;
+  width:100px;
+  top:25%;
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+.inputgroup input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+  from { background:#5264AE; }
+  to  { width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+  from { background:#5264AE; }
+  to  { width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+  from { background:#5264AE; }
+  to  { width:0; background:transparent; }
+}
+
+/* NavBar ================================== */
+// .navbar {
+//   background-color: $secondaryGreen
+// }
+.navbar-brand {
+  color: $secondaryGreen !important;
+}
+.logo {
+  width: 35px;
+}
+
+/* CARDS =================================== */
+.card {
+  // max-width: 20rem;
+  background-color: $brightGreen;
+  border: none !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }

@@ -1,13 +1,16 @@
 const router = require('express').Router()
 const request = require('request-promise-native')
+const chalk = require('chalk')
 
+/* Keys ========================================= */
 const appId = process.env.appId_N || null
 const appKey = process.env.appKey_N || null
 
+/* Routes ======================================== */
 router.get('/', (req, res, next) => {
   const query = encodeURI(req.query.ingr)
-  console.log('query: ', query)
-  //Food Parser uri
+  console.log(chalk.green('Querying API for item: ', query))
+  //Food Parser uri - returns all possible results
   const uri = `https://api.edamam.com/api/food-database/parser?ingr=${query}&app_id=${appId}&app_key=${appKey}&page=0`
 
   request({ uri, json: true })
@@ -41,7 +44,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const foodURI = req.body.foodURI
   const measureURI = req.body.measureURI
-  console.log('looking up: ', req.body)
+  console.log(chalk.green('Querying API for more item details: ', req.body))
   //Nutrient uri (based on the result of parser)
   const uri = `https://api.edamam.com/api/food-database/nutrients?app_id=${appId}&app_key=${appKey}`
   const body = {

@@ -23,9 +23,9 @@ class Routes extends Component {
         <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
-            <Route path='/search' component={RecipeSearch} />
-            <Route path='/itemsearch' component={ItemSearch} />
-            <Route path='/scorecard' component={ItemResultCard} />
+            <Route path='/search/recipes' component={RecipeSearch} />
+            <Route path='/search/' component={ItemSearch} />
+            <Route path='/scorecard' component={ItemResultCard} onEnter={() =>  window.scrollTo(0, 0)} />
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
             {
