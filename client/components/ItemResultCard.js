@@ -15,6 +15,9 @@ const ItemResultCard = (props) => {
   const nutrients = item && item.totalNutrients
               ? Object.keys(item.totalNutrients).map(key => item.totalNutrients[key])
               : 'N/A'
+  const image = item && item.image
+              ? 'item.image'
+              : 'http://www.foodista.com/sites/default/files/default_images/placeholder_rev.png'
   return (
   <div className="card">
     <h4 className="card-header">{ name }</h4>

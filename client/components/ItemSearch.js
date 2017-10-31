@@ -23,24 +23,11 @@ const ItemSearch = (props) => {
           <form onSubmit={ handleClick } key={i} className="col-sm-4">
           <div className="card mb-3">
           <img className="card-img-top" src="http://via.placeholder.com/350x150" alt="Card image cap" />
-            <div className="card-body" value={item.food.uri} name="item">
-              <h5 className="card-title">{item.food.label}</h5>
-              <select name="measurement" className="mt-1">
-              {
-                item.measures.length && item.measures.map((m, n) => {
-                  return (
-                    <option
-                      key={n}
-                      value={m.uri}>
-                      {m.label}
-                    </option>
-                  )
-                })
-              }
-              </select>
-              <br />
-              <small className="mr-1">measurement:</small>
-              <button className="btn btn-success float-right" name="item" value={item.food.uri}>Select</button>
+            <div className="card-body">
+              <h5 className="card-title">{item.ingredients[0].parsed[0].food}</h5>
+              <span><img src={isVegan(item.healthLabels)} width="35" className="mr-1" />{ isVegan(item.healthLabels) ? 'Vegan' : 'Not-Vegan'}</span>
+              <input className="hidden" name="measurement" value={item.ingredients[0].parsed[0].measureURI} />
+              <button className="btn btn-success float-right" name="item" value={item.ingredients[0].parsed[0].foodURI}>Select</button>
             </div>
           </div>
           </form>
@@ -66,6 +53,7 @@ const mapDispatch = (dispatch) => {
         foodURI: evt.target.item.value,
         measureURI: evt.target.measurement.value
       }
+      console.log(body)
       dispatch(getItemInfo(body))
     },
     handleSubmit(evt) {
