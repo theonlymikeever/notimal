@@ -28,7 +28,7 @@ return (
           {
             isLoggedIn
               ? <div>
-                  <a onClick={handleClick}>logout</a>
+                  <a href="#" onClick={handleClick}>logout</a>
                   <small className="text-muted ml-2">v1.0</small>
                 </div>
               : <div>

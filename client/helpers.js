@@ -247,6 +247,8 @@ const animalFreeList = [
 //room for serious improvement for speed as well as ability
 //to return which ingredients are not vegan
 export function veganIngredients(list){
+  list = list.split('; ')
+  console.log(list)
   let upperCaseNames = animalFreeList.map(value => {
       return value.toUpperCase();
     });
@@ -258,12 +260,13 @@ export function veganIngredients(list){
 
 //Function checks the specific label list given back by
 //Edamans 'heathLabels'
-export function isVegan (labels){
-    console.log('searching labels: ', labels)
+export function isVegan (labels, ingr){
     if (labels.indexOf('VEGAN') !== -1){
       return true
-    } else if(labels.indexOf('VEGETARIAN') !== -1) {
-      return true
+    }
+    if (ingr){
+      console.log('no label checking ingredients ',veganIngredients(ingr))
+      return veganIngredients(ingr)
     }
     return false
   }
