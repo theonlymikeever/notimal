@@ -20,7 +20,7 @@ return (
             <NavLink className="nav-link" to="/search/recipes">recipes</NavLink>
           </div>
           <div className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" exact to="#">about</NavLink>
+            <NavLink activeClassName="active" className="nav-link" exact to="/about">about</NavLink>
           </div>
         </div>
         <div className="pull-right">

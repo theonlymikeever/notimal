@@ -18,7 +18,6 @@ const Main = (props) => {
     <div>
     <NavBar isLoggedIn={isLoggedIn} handleClick={handleClick} />
       <div className="container">
-        <h1 className="text-center mb-2">a tool for herbivores</h1>
         {children}
       </div>
     </div>

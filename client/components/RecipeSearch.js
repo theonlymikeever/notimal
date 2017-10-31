@@ -13,7 +13,7 @@ const RecipeSearch = (props) => {
         <input name="query" />
         <span className="highlight" />
         <span className="bar" />
-        <label>Search</label>
+        <label>Search Recipe</label>
       </div>
     </form>
     <RecipeResultCard recipe={ recipe } />
