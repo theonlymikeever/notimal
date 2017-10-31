@@ -33,6 +33,7 @@ const mapDispatch = (dispatch) => {
       evt.preventDefault()
       console.log('you searched: ', evt.target.query.value)
       dispatch(searchRecipe(evt.target.query.value))
+      evt.target.query.value = '' //reset form
     }
   }
 }

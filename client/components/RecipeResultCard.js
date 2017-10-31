@@ -10,7 +10,7 @@ const RecipeResultCard = (props) => {
   {
     props.recipe && props.recipe.hits
       ? props.recipe.hits.map((res, i) => {
-        let vegan = isVegan(res.recipe.healthLabels, res.recipe.ingredients)
+        let vegan = isVegan(res.recipe.healthLabels)
         console.log(vegan)
         return (
           <li key={i}>{ res.recipe.label } - <img src={ vegan ? 'images/broccoli.png' : '/images/steak.png'} width="45" className="mr-1" />{ vegan ? 'Vegan' : 'Not-Vegan'}</li>
