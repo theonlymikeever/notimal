@@ -23,7 +23,7 @@ const ItemSearch = (props) => {
           return (
           <form onSubmit={ handleClick } key={i} className="col-sm-4">
           <div className="card mb-3">
-          <img className="card-img-top" src={item.image} alt="Card image cap" />
+          <img className="card-img-top" src={item.image.url} alt="Card image cap" />
             <div className="card-body">
               <h5 className="card-title">{item.ingredients[0].parsed[0].food}</h5>
               <div className="mb-3 ml-0"><img src={ vegan ? 'images/broccoli.png' : '/images/steak.png'} width="45" className="mr-1" />{ vegan ? 'Vegan' : 'Not-Vegan'}</div>

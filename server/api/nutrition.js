@@ -54,17 +54,18 @@ router.get('/', (req, res, next) => {
     })
     .then(fullResults => {
       console.log('searching image for ', query)
-      //Add images
-      // client.search(query)
-      //   .then(images => {
-      //     fullResults.map((food, i) => {
-      //       food.image = images[i]
-      //       return food
-      //     })
-      //     res.send(fullResults)
-      //   })
-        fullResults.map(food => food.image = 'http://www.foodista.com/sites/default/files/default_images/placeholder_rev.png')
-      res.send(fullResults)
+      // Add images via Google Search API
+      client.search(query)
+        .then(images => {
+          fullResults.map((food, i) => {
+            food.image = images[i]
+            return food
+          })
+          res.send(fullResults)
+        })
+        //For testing enable below, as to not blow out GSE API limit
+      //   fullResults.map(food => food.image = 'http://www.foodista.com/sites/default/files/default_images/placeholder_rev.png')
+      // res.send(fullResults)
     })
     .catch( err => console.log(err.error))
 })
@@ -94,13 +95,12 @@ router.post('/', (req, res, next) => {
   }
    request(options)
     .then(nutrients => {
-      //Image addition via Google Custom Search API
-      console.log('searching image for ', nutrients.ingredients[0].parsed[0].food)
-      // client.search(nutrients.ingredients[0].parsed[0].food)
-      //   .then(images => {
-      //     nutrients.image = images[1].url
+      // Image addition via Google Custom Search API
+      client.search(nutrients.ingredients[0].parsed[0].food)
+        .then(images => {
+          nutrients.image = images[1].url
           res.send(nutrients)
-        // })
+        })
     })
     .catch( err => console.log(err.error))
 })

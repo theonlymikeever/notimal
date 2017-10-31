@@ -1,5 +1,6 @@
 //some improvements can be made here for edge cases
-//Sourced from https://www.peta.org
+//Sourced from https://www.peta.org with additions by myself
+//to improve the reliability
 const animalFreeList = [
   "Adrenaline",
   "Alanine",
@@ -19,6 +20,7 @@ const animalFreeList = [
   "Animal Hair",
   "Arachidonic Acid",
   "Arachidyl Proprionate",
+  "Beef",
   "Bee Pollen",
   "Bee Products",
   "Beeswax. Honeycomb",
@@ -47,6 +49,8 @@ const animalFreeList = [
   "Cerebrosides",
   "Cetyl Alcohol",
   "Cetyl Palmitate",
+  "Cheese",
+  "Chicken",
   "Chitosan",
   "Cholesterin",
   "Cholesterol",
@@ -66,6 +70,8 @@ const animalFreeList = [
   "Down",
   "Duodenum Substances",
   "Dyes",
+  "Egg",
+  "Eggs",
   "Egg Protein",
   "Elastin",
   "Emu Oil",
@@ -117,6 +123,7 @@ const animalFreeList = [
   "Calfskin",
   "Sheepskin",
   "Alligator Skin",
+  "Lamb",
   "Lecithin. Choline Bitartrate",
   "Linoleic Acid",
   "Lipase",
@@ -160,6 +167,7 @@ const animalFreeList = [
   "Polyglycerol",
   "Polypeptides",
   "Polysorbates",
+  "Pork",
   "Pristane",
   "Progesterone",
   "Propolis",
@@ -212,7 +220,9 @@ const animalFreeList = [
   "Steroids. Sterols",
   "Sterols",
   "Suede",
-  "Tallow. Tallow Fatty Alcohol. Stearic Acid",
+  "Tallow",
+  "Tallow Fatty Alcohol",
+  "Stearic Acid",
   "Tallow Acid",
   "Tallow Amide",
   "Tallow Amine",
@@ -246,14 +256,12 @@ const animalFreeList = [
 //against the list of ingredients above
 //room for serious improvement for speed as well as ability
 //to return which ingredients are not vegan
-export function veganIngredients(list){
-  list = list.split('; ')
-  console.log(list)
-  let upperCaseNames = animalFreeList.map(value => {
+export function veganIngredients(ingredients){
+  let upperCaseList = animalFreeList.map(value => {
       return value.toUpperCase();
     });
-  return list.every(i => {
-    return upperCaseNames.indexOf(i.toUpperCase()) === -1
+  return upperCaseList.every(i => {
+    return ingredients.toUpperCase().indexOf(i) === -1
   })
 }
 
