@@ -29,7 +29,7 @@ router.get('/', (req, res, next) => {
   //Route has been re-written to do a post request for all items returned by initial query
   request({ uri, json: true })
     .then(results => {
-      results.hints = results.hints.slice(0, 10) //limit our results
+      results.hints = results.hints.slice(0, 5) //limit our results
       let block = results.hints.map(food => {
           let body = {
             yield: 1,
