@@ -22,11 +22,11 @@ const ItemSearch = (props) => {
           return (
           <form onSubmit={ handleClick } key={i} className="col-sm-4">
           <div className="card mb-3">
-          <img className="card-img-top" src="http://via.placeholder.com/350x150" alt="Card image cap" />
+          <img className="card-img-top" src={item.image.url} alt="Card image cap" />
             <div className="card-body">
               <h5 className="card-title">{item.ingredients[0].parsed[0].food}</h5>
               <span><img src={isVegan(item.healthLabels)} width="35" className="mr-1" />{ isVegan(item.healthLabels) ? 'Vegan' : 'Not-Vegan'}</span>
-              <input className="hidden" name="measurement" value={item.ingredients[0].parsed[0].measureURI} />
+              <input className="hidden" name="measurement" value={item.ingredients[0].parsed[0].measureURI} hidden />
               <button className="btn btn-success float-right" name="item" value={item.ingredients[0].parsed[0].foodURI}>Select</button>
             </div>
           </div>

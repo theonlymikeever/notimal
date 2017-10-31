@@ -16,29 +16,39 @@ const ItemResultCard = (props) => {
               ? Object.keys(item.totalNutrients).map(key => item.totalNutrients[key])
               : 'N/A'
   const image = item && item.image
-              ? 'item.image'
+              ? item.image
               : 'http://www.foodista.com/sites/default/files/default_images/placeholder_rev.png'
   return (
   <div className="card">
-    <h4 className="card-header">{ name }</h4>
+    <h4 className="card-header">
+    { item
+      ? <span><img src={isVegan(item.healthLabels) ? 'images/broccoli.png' : '/images/steak.png'} width="35" className="mr-1" />{ isVegan(item.healthLabels) ? 'Vegan' : 'Not-Vegan'}</span>
+      : null
+    }
+    </h4>
     <div className="card-body">
-      <h4 className="card-title">
-        { item
-          ? <span><img src={isVegan(item.healthLabels)} width="35" className="mr-1" />{ isVegan(item.healthLabels) ? 'Vegan' : 'Not-Vegan'}</span>
-          : null
-        }
-      </h4>
-      <p className="card-text">Ingredients: {ingredients}</p>
-      <div className="row">
-        {
-          nutrients.map((nutr, i) => {
-            return (
-              <button key={i} type="button" className="btn btn-success m-1">
-                {nutr.label} <span className="badge badge-light">{nutr.quantity.toFixed(0, 2)}{nutr.unit}</span>
-              </button>
-            )
-          })
-        }
+      <div className="row mb-1">
+        <div className="col-sm-4">
+          <img src={image} className="img-fluid mt-1 mb-2" />
+        </div>
+        <div className="col-sm-8">
+          <button className="btn btn-warning m-1 float-right">
+              Calories <span className="badge badge-light">{item.calories}</span>
+            </button>
+          <h4 className="card-title mt-1">{ name }</h4>
+          <p className="card-text pt-2"><strong>Ingredients:</strong>{ingredients}</p>
+          <div className="row mt-3">
+            {
+              nutrients.map((nutr, i) => {
+                return (
+                  <button key={i} type="button" className="btn btn-success m-1">
+                    {nutr.label} <span className="badge badge-light">{nutr.quantity.toFixed(0, 2)}{nutr.unit}</span>
+                  </button>
+                )
+              })
+            }
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -9,6 +9,8 @@ const appId = process.env.appId_N || null
 const appKey = process.env.appKey_N || null
 
 /* Routes ======================================= */
+
+//This route is mostly for testing
 router.get('/images', (req, res, next) =>{
   console.log(chalk.green('searching images of ', req.query.i))
   client.search(req.query.i)
@@ -18,13 +20,13 @@ router.get('/images', (req, res, next) =>{
       .catch(err => console.log(err))
 })
 
+//This route will be our main search route to handle queries
 router.get('/', (req, res, next) => {
   const query = encodeURI(req.query.ingr)
   console.log(chalk.green('Querying API for item: ', query))
   //Food Parser uri - returns all possible results
   const uri = `https://api.edamam.com/api/food-database/parser?ingr=${query}&app_id=${appId}&app_key=${appKey}&page=0`
   //Route has been re-written to do a post request for all items returned by initial query
-  //this is done via a promise.all and thus all items are sent back with their nutrition info
   request({ uri, json: true })
     .then(results => {
       results.hints = results.hints.slice(0, 10) //limit our results
@@ -51,18 +53,23 @@ router.get('/', (req, res, next) => {
       return Promise.all(block)
     })
     .then(fullResults => {
-      // console.log('searching image for ', query)
+      console.log('searching image for ', query)
+      //Add images
       // client.search(query)
       //   .then(images => {
-      //     nutrients.image = images[1].url
-      //     res.send(nutrients)
+      //     fullResults.map((food, i) => {
+      //       food.image = images[i]
+      //       return food
+      //     })
+      //     res.send(fullResults)
       //   })
+        fullResults.map(food => food.image = 'http://www.foodista.com/sites/default/files/default_images/placeholder_rev.png')
       res.send(fullResults)
     })
     .catch( err => console.log(err.error))
 })
 
-//Post route will be depreciated once we pass single item along in store
+//This POST route will be depreciated once we pass single item along in store
 router.post('/', (req, res, next) => {
   const foodURI = req.body.foodURI
   const measureURI = req.body.measureURI
