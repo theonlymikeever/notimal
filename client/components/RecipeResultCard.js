@@ -22,7 +22,7 @@ const RecipeResultCard = (props) => {
         return (
           <tr key={i}>
             <th>{ res.recipe.label }</th>
-            <td><img src={ vegan ? 'images/broccoli.png' : '/images/steak.png'} width="45" className="mr-1" />{ vegan ? 'Vegan' : 'Not-Vegan'}</td>
+            <td><img src={ vegan ? '/images/broccoli.png' : '/images/steak.png'} width="45" className="mr-1" />{ vegan ? 'Vegan' : 'Not-Vegan'}</td>
           </tr>
         )})
       }

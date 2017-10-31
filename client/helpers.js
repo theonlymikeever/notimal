@@ -269,7 +269,7 @@ export function veganIngredients(ingredients){
 //Function checks the specific label list given back by
 //Edamans 'heathLabels'
 export function isVegan (labels, ingr){
-    if (labels.indexOf('VEGAN') !== -1){
+    if (labels.indexOf('VEGAN') !== -1 || labels.indexOf('Vegan') !== -1){
       return true
     }
     if (ingr){
